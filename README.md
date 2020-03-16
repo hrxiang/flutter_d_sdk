@@ -12,3 +12,7 @@ Android and/or iOS.
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.dev/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+
+###///根据action区分当前执行的操作类型，如，登录：login，支付：pay。action的值钱包和游戏共同制定
+ 1，var dSdk = FlutterDSdk(action: "login");
