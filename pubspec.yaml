@@ -2,7 +2,7 @@ name: flutter_d_sdk
 description: A new Flutter plugin.
 version: 0.0.1
 author: xianghairui<xianghairui@126.com>
-homepage: https://github.com/hrxiang
+homepage: https://github.com/hrxiang/flutter_d_sdk
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
