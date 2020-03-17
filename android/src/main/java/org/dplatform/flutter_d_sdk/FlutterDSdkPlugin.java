@@ -1,11 +1,15 @@
 package org.dplatform.flutter_d_sdk;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 
 import org.dplatform.DSdkAPI;
 import org.dplatform.DSdkApiCallback;
 import org.dplatform.DSdkApiFactory;
 import org.dplatform.DSdkResp;
+import org.dplatform.Utils;
+import org.dplatform.WithParameter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,11 +19,18 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
 
-public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
-    private Context context;
+import static org.dplatform.Constant.KEY_SDK_PACKAGE;
+import static org.dplatform.Constant.KEY_SDK_SIGN;
+import static org.dplatform.Constant.KEY_SDK_VERSION;
+import static org.dplatform.Constant.SDK_PACKAGE;
+import static org.dplatform.Constant.SDK_SIGN;
+import static org.dplatform.Constant.SDK_VERSION;
 
-    private FlutterDSdkPlugin(Context context) {
-        this.context = context;
+public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
+    private Activity activity;
+
+    private FlutterDSdkPlugin(Activity activity) {
+        this.activity = activity;
     }
 
     public static void registerWith(PluginRegistry.Registrar registrar) {
@@ -35,9 +46,9 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                     Map<String, String> map = methodCall.arguments();
                     String uriString = map.remove("uriString");
                     String appKey = map.remove("appKey");
-
+                    String intentType = map.remove("intentType");
                     //创建api
-                    DSdkAPI api = DSdkApiFactory.createUpAPI(context, uriString, appKey);
+                    DSdkAPI api = DSdkApiFactory.createUpAPI(activity, uriString, appKey);
                     for (String key : map.keySet()) {
                         api.appendParameter(key, map.get(key));
                     }
@@ -76,7 +87,32 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                         }
                     });
                     //发送请求
-                    api.sendReq();
+                    if ("broadcast".equals(intentType)) {
+                        //通过方式广播方式传递值
+                        api.sendReq();
+                    } else {
+                        //通过启动activity方式传递值
+                        Uri uri = api.queryUri();
+                        if (null != uri) {
+                            try {
+                                Utils.call(activity, uri, new WithParameter() {
+                                    @Override
+                                    public void with(Intent intent) {
+                                        intent.setAction(Intent.ACTION_VIEW);
+                                        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.putExtra(KEY_SDK_PACKAGE, SDK_PACKAGE);
+                                        intent.putExtra(KEY_SDK_VERSION, SDK_VERSION);
+                                        intent.putExtra(KEY_SDK_SIGN, SDK_SIGN);
+                                    }
+                                });
+                            } catch (Exception e) {
+                                DSdkResp<String> exResp = new DSdkResp<>();
+                                exResp.code = -3;
+                                exResp.msg = e.getMessage();
+                                result.success(exResp.toString());
+                            }
+                        }
+                    }
                 }
             }
         } catch (Exception e) {

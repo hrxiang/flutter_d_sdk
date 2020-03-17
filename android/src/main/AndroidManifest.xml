@@ -20,5 +20,24 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
+        <!--<activity
+            android:name="org.dplatform.DSdkRouteActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="testscheme"
+                    android:host="testhost"
+                    android:path="/testpath"/>
+                <data/>
+            </intent-filter>
+        </activity>-->
+
     </application>
 </manifest>

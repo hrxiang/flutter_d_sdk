@@ -22,7 +22,6 @@ public final class DSdkAPI {
                 .appendQueryParameter("callbackUri", RESPONSE_ACTION);
     }
 
-
     /**
      * @param key   参数键
      * @param value 参数值
@@ -50,7 +49,7 @@ public final class DSdkAPI {
         }
     }
 
-    Uri queryUri() {
+    public Uri queryUri() {
         return builder.build();
     }
 
