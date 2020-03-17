@@ -22,5 +22,5 @@ import Flutter
             )
         }
         return true
-      }
+    }
 }
