@@ -1,8 +1,6 @@
 # flutter_d_sdk
 
-A new Flutter plugin.
-
-## Getting Started
+  其他app与d平台钱包通信
 
 ## 例：游戏唤起钱包获取token实现登录游戏
 
@@ -18,7 +16,7 @@ A new Flutter plugin.
 
     var result = await dSdk.call(uriString: "up://uptest/do");
 
-    注：uriString：当前指钱包app需要注册的scheme。
-       downloadUrl:当前指钱包app的下载地址。
+    注：uriString：当前例子指钱包app需要注册的scheme。
+       downloadUrl:当前例子指钱包app的下载地址。
        appKey:加密密钥（传null即可）。
        params：传递的参数。
