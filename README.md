@@ -31,23 +31,23 @@
 
 ### Android接入配置（必要）：
 
-- AndroidManifest添加一下配置，并修改Scheme
+- AndroidManifest添加以下配置，并修改Scheme
 ```
    <activity
-            android:name="org.dplatform.DSdkRouteActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:scheme="你的scheme"
-                    android:host="你的host"
-                    android:path="你的path"/>
-                <data/>
-            </intent-filter>
+       android:name="org.dplatform.DSdkRouteActivity"
+       android:configChanges="keyboardHidden|orientation|screenSize"
+       android:exported="true"
+       android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+       <intent-filter>
+           <action android:name="android.intent.action.VIEW"/>
+           <category android:name="android.intent.category.DEFAULT"/>
+           <category android:name="android.intent.category.BROWSABLE"/>
+           <data
+              android:scheme="你的scheme"
+              android:host="你的host"
+               android:path="你的path"/>
+           <data/>
+       </intent-filter>
    </activity>
 ```
 
