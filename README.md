@@ -4,7 +4,7 @@
 
 ## 例：游戏唤起钱包获取token实现登录游戏
 
-### 1, 创建sdk并指定当前操作类型
+### 1， 创建sdk并指定当前操作类型
 
     var dSdk = FlutterDSdk(action: "login");
 
@@ -12,7 +12,7 @@
        action的值由钱包和游戏共同制定。
 
 
-### 2, 唤起sdk并获取返回值
+### 2， 唤起sdk并获取返回值
 
     var result = await dSdk.call(uriString: "up://uptest/do");
 
@@ -20,3 +20,5 @@
        downloadUrl:当前例子指钱包app的下载地址。
        appKey:加密密钥（传null即可）。
        params：传递的参数。
+
+### 3，ios App其他处理
