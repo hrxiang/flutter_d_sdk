@@ -9,8 +9,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var result = 'Unknown';
-  var dSdk = FlutterDSdk(action: "login");
+  var token = 'Unknown';
+  var pay = "Unknown";
 
   @override
   void initState() {
@@ -27,19 +27,36 @@ class _MyAppState extends State<MyApp> {
         body: Center(
             child: Column(
           children: <Widget>[
-            Text('result: $result'),
+            Text('token: $token'),
             RaisedButton(
-              child: Text('call'),
+              child: Text('去登陆'),
               onPressed: () {
                 //
-                dSdk.call(uriString: "up://uptest/do").then((val) {
+                FlutterDSdk(action: "login")
+                    .call(uriString: "up://uptest/do")
+                    .then((val) {
                   setState(() {
-                    result = val;
+                    token = val;
                   });
                 });
                 //
               },
-            )
+            ),
+            Text('充值结果: $pay'),
+            RaisedButton(
+              child: Text('去充值'),
+              onPressed: () {
+                //
+                FlutterDSdk(action: "pay")
+                    .call(uriString: "up://uptest/do")
+                    .then((val) {
+                  setState(() {
+                    pay = val;
+                  });
+                });
+                //
+              },
+            ),
           ],
         )),
       ),
