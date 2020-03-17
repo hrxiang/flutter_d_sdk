@@ -3,7 +3,7 @@ package org.dplatform;
 public interface Constant {
     String RESPONSE_ACTION = "%s.action_callback_000000";
     String CANCEL_ACTION = "%s.action_callback_111111";
-    String KEY_RESPONSE = "resp";
+    String KEY_RESPONSE = "d_sdk_resp";
 
     String KEY_SDK_VERSION = "sdk_version";
     String KEY_SDK_PACKAGE = "sdk_packageName";

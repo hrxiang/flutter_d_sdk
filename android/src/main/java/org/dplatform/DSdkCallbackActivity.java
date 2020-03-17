@@ -21,7 +21,7 @@ import static org.dplatform.Constant.SDK_SIGN;
 import static org.dplatform.Constant.SDK_VERSION;
 
 
-public class UpExCallbackActivity extends Activity {
+public class DSdkCallbackActivity extends Activity {
 
     private UpExchangeCallbackBroadcastReceiver mReceiver;
     private boolean isCancel;
@@ -40,14 +40,14 @@ public class UpExCallbackActivity extends Activity {
 
 //        if (!Utils.isInstalled(this, packageName)) {
 //            if (enableCallback()) {
-//                UpExApiFactory.api.getRespCallback().onUninstall();
+//                DSdkApiFactory.api.getRespCallback().onUninstall();
 //            }
 //        } else {
 //        }
 
         register();
 
-        Uri uri = UpExApiFactory.api.queryUri();
+        Uri uri = DSdkApiFactory.api.queryUri();
         if (null != uri) {
             try {
 
@@ -85,16 +85,16 @@ public class UpExCallbackActivity extends Activity {
                 if (null != intent && enableCallback()) {
                     if (getAction(RESPONSE_ACTION).equals(intent.getAction())) {
                         String result = intent.getStringExtra(KEY_RESPONSE);
-                        UpExApiFactory.api.getRespCallback().onRespResult(result);
+                        DSdkApiFactory.api.getRespCallback().onRespResult(result);
                     } else if (getAction(CANCEL_ACTION).equals(intent.getAction())) {
-                        UpExApiFactory.api.getRespCallback().onCancel();
+                        DSdkApiFactory.api.getRespCallback().onCancel();
                     }
                 }
             } catch (Exception e) {
-                UpExResp<String> exResp = new UpExResp<>();
+                DSdkResp<String> exResp = new DSdkResp<>();
                 exResp.code = -3;
                 exResp.msg = e.getMessage();
-                UpExApiFactory.api.getRespCallback().onRespResult(exResp.toString());
+                DSdkApiFactory.api.getRespCallback().onRespResult(exResp.toString());
             } finally {
                 finish();
             }
@@ -106,7 +106,7 @@ public class UpExCallbackActivity extends Activity {
         super.onResume();
         if (isCancel) {
             if (enableCallback()) {
-                UpExApiFactory.api.getRespCallback().onCancel();
+                DSdkApiFactory.api.getRespCallback().onCancel();
             }
             finish();
         }
@@ -131,11 +131,11 @@ public class UpExCallbackActivity extends Activity {
     }
 
     private boolean enableCallback() {
-        return isCreatedApi() && null != UpExApiFactory.api.getRespCallback();
+        return isCreatedApi() && null != DSdkApiFactory.api.getRespCallback();
     }
 
     private boolean isCreatedApi() {
-        return null != UpExApiFactory.api;
+        return null != DSdkApiFactory.api;
     }
 
     private String getAction(String format) {

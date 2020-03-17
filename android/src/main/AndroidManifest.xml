@@ -16,7 +16,7 @@
 
     <application>
         <activity
-            android:name="org.dplatform.UpExCallbackActivity"
+            android:name="org.dplatform.DSdkCallbackActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />

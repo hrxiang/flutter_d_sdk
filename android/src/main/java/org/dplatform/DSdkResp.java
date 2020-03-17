@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpExResp<T> implements Serializable {
+public class DSdkResp<T> implements Serializable {
     public int code;
     public String msg;
     public T data;

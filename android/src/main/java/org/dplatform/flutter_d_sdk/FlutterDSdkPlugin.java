@@ -2,10 +2,10 @@ package org.dplatform.flutter_d_sdk;
 
 import android.content.Context;
 
-import org.dplatform.UpExAPI;
-import org.dplatform.UpExApiCallback;
-import org.dplatform.UpExApiFactory;
-import org.dplatform.UpExResp;
+import org.dplatform.DSdkAPI;
+import org.dplatform.DSdkApiCallback;
+import org.dplatform.DSdkApiFactory;
+import org.dplatform.DSdkResp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,16 +37,16 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                     String appKey = map.remove("appKey");
 
                     //创建api
-                    UpExAPI api = UpExApiFactory.createUpAPI(context, uriString, appKey);
+                    DSdkAPI api = DSdkApiFactory.createUpAPI(context, uriString, appKey);
                     for (String key : map.keySet()) {
                         api.appendParameter(key, map.get(key));
                     }
                     //注册回调
-                    api.registerRespCallback(new UpExApiCallback() {
+                    api.registerRespCallback(new DSdkApiCallback() {
                         @Override
                         public void onRespResult(String data) {
                             //响应结果
-                            UpExResp resp = new UpExResp();
+                            DSdkResp resp = new DSdkResp();
                             resp.code = 0;
                             resp.msg = "success";
                             try {
@@ -60,7 +60,7 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                         @Override
                         public void onCancel() {
                             //被用户取消
-                            UpExResp resp = new UpExResp();
+                            DSdkResp resp = new DSdkResp();
                             resp.code = -1;
                             resp.msg = "canceled";
                             result.success(resp.toString());
@@ -69,7 +69,7 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                         @Override
                         public void onUninstall() {
                             //app未安装
-                            UpExResp resp = new UpExResp();
+                            DSdkResp resp = new DSdkResp();
                             resp.code = -2;
                             resp.msg = "app uninstalled";
                             result.success(resp.toString());

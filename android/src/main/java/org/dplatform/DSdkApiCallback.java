@@ -1,6 +1,6 @@
 package org.dplatform;
 
-public interface UpExApiCallback {
+public interface DSdkApiCallback {
     /**
      * 授权结果
      */

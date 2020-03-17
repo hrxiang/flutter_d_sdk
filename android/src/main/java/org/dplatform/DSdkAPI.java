@@ -8,13 +8,13 @@ import java.lang.ref.WeakReference;
 
 import static org.dplatform.Constant.RESPONSE_ACTION;
 
-public final class UpExAPI {
+public final class DSdkAPI {
     private WeakReference<Context> reference;
-    private UpExApiCallback callback;
+    private DSdkApiCallback callback;
     private Uri.Builder builder;
     private String appKey;
 
-    UpExAPI(WeakReference<Context> reference, String packageName, String uri, String appKey) {
+    DSdkAPI(WeakReference<Context> reference, String packageName, String uri, String appKey) {
         this.reference = reference;
         this.appKey = appKey;
         this.builder = Uri.parse(uri).buildUpon()
@@ -36,7 +36,7 @@ public final class UpExAPI {
      *
      * @param callback 回调监听
      */
-    public void registerRespCallback(UpExApiCallback callback) {
+    public void registerRespCallback(DSdkApiCallback callback) {
         this.callback = callback;
     }
 
@@ -46,7 +46,7 @@ public final class UpExAPI {
     public void sendReq() {
         Context cxt = getContext();
         if (null != cxt) {
-            cxt.startActivity(new Intent(cxt, UpExCallbackActivity.class));
+            cxt.startActivity(new Intent(cxt, DSdkCallbackActivity.class));
         }
     }
 
@@ -61,7 +61,7 @@ public final class UpExAPI {
         return appKey;
     }
 
-    UpExApiCallback getRespCallback() {
+    DSdkApiCallback getRespCallback() {
         return callback;
     }
 
