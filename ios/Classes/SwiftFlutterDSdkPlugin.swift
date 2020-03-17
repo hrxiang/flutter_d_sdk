@@ -44,3 +44,19 @@ public class SwiftFlutterDSdkPlugin: NSObject, FlutterPlugin {
         }
     }
 }
+
+extension Dictionary {
+    
+    func obj2json() -> String? {
+        if (!JSONSerialization.isValidJSONObject(self)) {
+            return nil
+        }
+        
+        if let data = try? JSONSerialization.data(withJSONObject: self, options: [.init(rawValue: 0)]),
+            let JSONString = NSString(data:data,encoding: String.Encoding.utf8.rawValue) {
+            return JSONString as String
+        }
+        return nil
+    }
+    
+}

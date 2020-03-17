@@ -27,14 +27,19 @@ class _MyAppState extends State<MyApp> {
         body: Center(
             child: Column(
           children: <Widget>[
-            Text('token: $token'),
+            Text('response: $token'),
             RaisedButton(
-              child: Text('去登陆'),
+              child: Text('去登陆 Login'),
               onPressed: () {
                 //
-                FlutterDSdk(action: "login")
-                    .call(uriString: "up://uptest/do")
-                    .then((val) {
+                FlutterDSdk(action: "login").call(
+                  uriString: "dplatform://dplatform.org",
+                  params: {
+                    'channelID': '10000144',
+                    'scheme': 'xyttylusdt',
+                    'appName': 'Testapp',
+                  },
+                ).then((val) {
                   setState(() {
                     token = val;
                   });
@@ -42,9 +47,9 @@ class _MyAppState extends State<MyApp> {
                 //
               },
             ),
-            Text('充值结果: $pay'),
+            Text('response: $pay'),
             RaisedButton(
-              child: Text('去充值'),
+              child: Text('去充值 Pay'),
               onPressed: () {
                 //
                 FlutterDSdk(action: "pay")
