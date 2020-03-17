@@ -29,16 +29,21 @@
                 if (null != intent) {
                      Uri uri = intent.getData();
                      if (null != uri) {
+                         String action = uri.getQueryParameter("action");
                          String packageName = uri.getQueryParameter("packageName");
                          String callbackUri = uri.getQueryParameter("callbackUri");
-                         String action = String.format(callbackUri, packageName);
+                         String filterAction = String.format(callbackUri, packageName);
                          Intent intent = new Intent();
-                         intent.setAction(action);
-                         //回传的数据
+                         intent.setAction(filterAction);
+                          //回传的数据
                          Map<String, String> params = new HashMap<>();
-                         params.put("token", "202003171122");
+                         if ("login".equals(action)) {
+                             params.put("token", "202003171122");
+                         } else if ("pay".equals(action)) {
+                             params.put("money", "100000000");
+                         }
                          //"d_sdk_resp"这个key是固定的不要修改，value是json字符串
-                         intent.putExtra("d_sdk_resp", new JSONObject(map).toString());
+                         intent.putExtra("d_sdk_resp", new JSONObject(params).toString());
                          sendBroadcast(intent);
                          //启动钱包的方式不会影响已启动的钱包的操作流程，是两个独立的程序。
                          //关闭当前页面，如果启动了多个页面才拿到数据，则需要关闭所有启动过的所有页面。
