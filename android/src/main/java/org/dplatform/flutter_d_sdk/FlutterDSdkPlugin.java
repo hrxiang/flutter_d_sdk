@@ -49,9 +49,10 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                     String intentType = map.remove("intentType");
                     //创建api
                     DSdkAPI api = DSdkApiFactory.createUpAPI(activity, uriString, appKey);
-                    for (String key : map.keySet()) {
-                        api.appendParameter(key, map.get(key));
-                    }
+//                    for (String key : map.keySet()) {
+//                        api.appendParameter(key, map.get(key));
+//                    }
+                    api.appendParameter("param", new JSONObject(map).toString());
                     //注册回调
                     api.registerRespCallback(new DSdkApiCallback() {
                         @Override
@@ -94,6 +95,7 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                         //通过启动activity方式传递值
                         Uri uri = api.queryUri();
                         if (null != uri) {
+                            System.out.println("uri:" + uri.toString());
                             try {
                                 Utils.call(activity, uri, new WithParameter() {
                                     @Override
