@@ -33,19 +33,11 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
             if ("call".equals(methodCall.method)) {
                 if (methodCall.arguments() instanceof Map) {
                     Map<String, String> map = methodCall.arguments();
-                    String destPackageName = map.remove("destPackageName");
                     String uriString = map.remove("uriString");
                     String appKey = map.remove("appKey");
-                    String action = map.get("action");
-                    if (null == destPackageName || null == uriString || null == action) {
-                        throw new IllegalArgumentException("destPackageName or uriString or action is null");
-                    }
-                    System.out.println("===========destPackageName===============" + destPackageName);
-                    System.out.println("===========uriString===============" + uriString);
-                    System.out.println("===========appKey===============" + appKey);
-                    System.out.println("===========action===============" + action);
+
                     //创建api
-                    UpExAPI api = UpExApiFactory.createUpAPI(context, destPackageName, uriString, appKey);
+                    UpExAPI api = UpExApiFactory.createUpAPI(context, uriString, appKey);
                     for (String key : map.keySet()) {
                         api.appendParameter(key, map.get(key));
                     }
@@ -70,7 +62,7 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                             //被用户取消
                             UpExResp resp = new UpExResp();
                             resp.code = -1;
-                            resp.msg = "用户取消";
+                            resp.msg = "canceled";
                             result.success(resp.toString());
                         }
 
@@ -79,7 +71,7 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
                             //app未安装
                             UpExResp resp = new UpExResp();
                             resp.code = -2;
-                            resp.msg = "app未安装";
+                            resp.msg = "app uninstalled";
                             result.success(resp.toString());
                         }
                     });

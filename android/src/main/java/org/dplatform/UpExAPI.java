@@ -13,14 +13,12 @@ public final class UpExAPI {
     private UpExApiCallback callback;
     private Uri.Builder builder;
     private String appKey;
-    private String destPackageName;
 
-    UpExAPI(WeakReference<Context> reference, String sourcePackageName, String destPackageName, String uri, String appKey) {
+    UpExAPI(WeakReference<Context> reference, String packageName, String uri, String appKey) {
         this.reference = reference;
-        this.destPackageName = destPackageName;
         this.appKey = appKey;
         this.builder = Uri.parse(uri).buildUpon()
-                .appendQueryParameter("packageName", sourcePackageName)
+                .appendQueryParameter("packageName", packageName)
                 .appendQueryParameter("callbackUri", RESPONSE_ACTION);
     }
 
@@ -31,11 +29,6 @@ public final class UpExAPI {
      */
     public void appendParameter(String key, String value) {
         builder.appendQueryParameter(key, value);
-    }
-
-
-    public String getDestPackageName() {
-        return destPackageName;
     }
 
     /**
@@ -61,6 +54,9 @@ public final class UpExAPI {
         return builder.build();
     }
 
+    /**
+     * 加密密钥
+     **/
     String getAppKey() {
         return appKey;
     }

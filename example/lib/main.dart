@@ -32,11 +32,7 @@ class _MyAppState extends State<MyApp> {
               child: Text('call'),
               onPressed: () {
                 //
-                dSdk
-                    .call(
-                        uriString: "up://uptest/do",
-                        destPackageName: "com.example.myapplication")
-                    .then((val) {
+                dSdk.call(uriString: "up://uptest/do").then((val) {
                   setState(() {
                     result = val;
                   });
