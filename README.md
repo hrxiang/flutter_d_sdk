@@ -41,7 +41,7 @@
     <string>Editor</string>
     <key>CFBundleURLSchemes</key>
         <array>
-            <string>xyttylusdt</string>
+            <string>your scheme</string>
         </array>
     </dict>
 </array>
