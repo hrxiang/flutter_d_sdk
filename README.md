@@ -53,4 +53,4 @@
                }
 
               注：uri的值只能在注册了scheme的activity才能获取。
-    IOS:
+    iOS:
