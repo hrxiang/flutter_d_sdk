@@ -2,7 +2,7 @@
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
       <root url="file://$PROJECT_DIR$" />
-      <root url="file://$USER_HOME$/tools/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.7" />
+      <root url="file://$USER_HOME$/Library/Developer/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.2.7" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

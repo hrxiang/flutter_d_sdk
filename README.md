@@ -18,9 +18,9 @@
      var result = await dSdk.call(
        uriString: "up://uptest/do", 
        params: {
-         'channelID': '1',
-         'scheme': 'test',
-         'appName': 'appName',
+         'channelID': 'the channel id',
+         'scheme': 'your scheme',
+         'appName': 'app name',
        },
      );
 
