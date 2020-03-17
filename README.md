@@ -20,7 +20,6 @@
        params: {
          'channelID': 'the channel id',
          'scheme': 'your scheme',
-         'appName': 'app name',
        },
      );
 
