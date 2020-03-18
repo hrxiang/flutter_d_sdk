@@ -1,32 +1,6 @@
 # flutter_d_sdk
 
-  其他app与d平台钱包通信
-
-## 例：游戏唤起钱包获取token实现登录游戏
-
-### 游戏接入步骤：
-#### 1， 创建sdk并指定当前操作类型
-
-     var dSdk = FlutterDSdk(action: "login");
-
-     注：根据action区分当前执行的操作类型，如：login（登录），pay（支付）。
-         action的值由钱包和游戏共同制定。
-
-
-#### 2， 唤起sdk并获取返回值
-
-     var result = await dSdk.call(
-       uriString: "up://uptest/do", 
-       params: {
-         'channelID': 'the channel id',
-         'scheme': 'your scheme',
-       },
-     );
-
-     注：uriString：当前例子指钱包app需要注册的scheme。
-        downloadUrl:当前例子指钱包app的下载地址。
-        appKey:加密密钥（传null即可）。
-        params：传递的参数。
+  接入方（APP）向授权方（APP）发起操作请求，如登录、支付、获取个人信息等。
 
 ### Android接入配置（必要）：
 
@@ -61,7 +35,7 @@
     <string>Editor</string>
     <key>CFBundleURLSchemes</key>
         <array>
-            <string>your scheme</string>
+            <string>你的scheme</string>
         </array>
     </dict>
 </array>
@@ -71,7 +45,7 @@
 ```
 <key>LSApplicationQueriesSchemes</key>
 <array>
-    <string>dplatform</string>
+    <string>授权方scheme</string>
 </array>
 ```
 
@@ -90,4 +64,32 @@ override func application(_ app: UIApplication, open url: URL, options: [UIAppli
     }
     return true
 }
+```
+
+### 接入方发起授权请求：
+#### 1， 创建SDK并指定当前操作类型
+```
+var dSdk = FlutterDSdk(action: "aciton-name");
+
+注：
+aciton-name 事件名称，由接入方和授权方协定。
+```
+
+
+#### 2， 发起授权请求并获取返回值
+```
+var result = await dSdk.call(
+    uriString: "scheme://a-platform/", 
+    params: {
+      'param1': 'value1',
+      'param2': 'value2',
+    },
+);
+
+注：
+uriString[必填]：[授权方scheme]://平台标识，有授权方定义；
+params[必填]：键值对参数，由双方协定；
+downloadUrl[可选]：授权方下载页面，当授权方APP未安装时，跳转至此链接页面；
+appKey[可选]：加密密钥（传null即可）；
+result：授权方返回信息，其类型由授权方决定。
 ```
