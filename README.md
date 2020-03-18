@@ -1,6 +1,8 @@
 # flutter_d_sdk
 
   接入方（APP）向授权方（APP）发起操作请求，如 游戏应用A 向 钱包应用B 发起登录、支付、获取个人信息请求等。
+  
+  ![flow](https://github.com/hrxiang/flutter_d_sdk/blob/master/flow.png)
 
 ### Android接入配置（必要）：
 
