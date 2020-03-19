@@ -9,8 +9,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var token = 'Unknown';
-  var pay = "Unknown";
+  var token = 'None';
+  var pay = "None";
+
+
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -27,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         body: Center(
             child: Column(
           children: <Widget>[
-            Text('response: $token'),
+            Text('登录结果: $token'),
             RaisedButton(
               child: Text('去登陆 Login'),
               onPressed: () {
@@ -37,7 +40,7 @@ class _MyAppState extends State<MyApp> {
                   params: {
                     'channelID': '10000144',
                     'scheme': 'xyttylusdt',
-                    'appName': 'Testapp',
+                    'appName': '四川麻将',
                   },
                 ).then((val) {
                   setState(() {
@@ -47,14 +50,32 @@ class _MyAppState extends State<MyApp> {
                 //
               },
             ),
-            Text('response: $pay'),
+
+            SizedBox(height: 50.0),
+
+            Text('支付结果: $pay'),
+            TextFormField(
+              decoration: InputDecoration(hintText: '请输入订单号'),
+              controller: _controller,
+            ),
             RaisedButton(
               child: Text('去充值 Pay'),
               onPressed: () {
+
+                if (_controller.text?.isEmpty ?? true) {
+                  setState(() {
+                    pay = '⚠️请输入订单号️⚠️';
+                  });
+                  return;
+                }
+
                 //
-                FlutterDSdk(action: "pay")
-                    .call(uriString: "up://uptest/do")
-                    .then((val) {
+                FlutterDSdk(action: "pay").call(
+                  uriString: "dplatform://dplatform.org",
+                  params: {
+                    'orderSn': _controller.text,
+                  }
+                ).then((val) {
                   setState(() {
                     pay = val;
                   });
