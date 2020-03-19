@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             Text('登录结果: $token'),
             RaisedButton(
-              child: Text('去登陆 Login'),
+              child: Text('去登录 Login'),
               onPressed: () {
                 //
                 FlutterDSdk(action: "login").call(
