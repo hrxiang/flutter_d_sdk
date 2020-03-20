@@ -10,10 +10,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var token = 'None';
-  var pay = "None";
+  var pay = 'None';
 
-
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controllerToken = TextEditingController();
+  final TextEditingController _controllerOrder = TextEditingController();
 
   @override
   void initState() {
@@ -31,17 +31,33 @@ class _MyAppState extends State<MyApp> {
             child: Column(
           children: <Widget>[
             Text('登录结果: $token'),
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: '对接方平台Token（仅Lite版登录填写）',
+              ),
+              controller: _controllerToken,
+            ),
             RaisedButton(
               child: Text('去登录 Login'),
               onPressed: () {
-                //
-                FlutterDSdk(action: "login").call(
-                  uriString: "dplatform://dplatform.org",
-                  params: {
-                    'channelID': '10000144',
-                    'scheme': 'xyttylusdt',
-                    'appName': '四川麻将',
-                  },
+                
+                var action = 'login';
+
+                var params = {
+                  'channelID': '10000144',
+                  'scheme': 'xyttylusdt',
+                  'appName': '四川麻将',
+                };
+
+                if (!(_controllerToken.text?.isEmpty ?? true)) {
+                  /// Lite模式，反向授权带入接入方的平台Token.
+                  action = 'auth';
+                  params['token'] = _controllerToken.text;
+                }
+
+                FlutterDSdk(action: action).call(
+                  uriString: 'dplatform://dplatform.org',
+                  params: params,
                 ).then((val) {
                   setState(() {
                     token = val;
@@ -56,25 +72,31 @@ class _MyAppState extends State<MyApp> {
             Text('支付结果: $pay'),
             TextFormField(
               decoration: InputDecoration(hintText: '请输入订单号'),
-              controller: _controller,
+              controller: _controllerOrder,
             ),
             RaisedButton(
               child: Text('去充值 Pay'),
               onPressed: () {
 
-                if (_controller.text?.isEmpty ?? true) {
+                if (_controllerOrder.text?.isEmpty ?? true) {
                   setState(() {
                     pay = '⚠️请输入订单号️⚠️';
                   });
                   return;
                 }
 
-                //
-                FlutterDSdk(action: "pay").call(
-                  uriString: "dplatform://dplatform.org",
-                  params: {
-                    'orderSn': _controller.text,
-                  }
+                var params = {
+                  'orderSn': _controllerOrder.text,
+                };
+
+                if (!(_controllerToken.text?.isEmpty ?? true)) {
+                  /// Lite模式，反向授权带入接入方的平台Token.
+                  params['token'] = _controllerToken.text;
+                }
+
+                FlutterDSdk(action: 'pay').call(
+                  uriString: 'dplatform://dplatform.org',
+                  params: params,
                 ).then((val) {
                   setState(() {
                     pay = val;
