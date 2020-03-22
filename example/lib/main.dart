@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
                 var action = 'login';
 
                 var params = {
-                  'channelID': '10000144',
+                  'channelID': '10013057',
                   'scheme': 'xyttylusdt',
                   'appName': '四川麻将',
                 };

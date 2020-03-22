@@ -22,7 +22,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 
-        <!--<activity
+        <activity
             android:name="org.dplatform.DSdkRouteActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
@@ -34,7 +34,7 @@
                     android:scheme="xyttylusdt"/>
                 <data/>
             </intent-filter>
-        </activity>-->
+        </activity>
 
     </application>
 </manifest>
