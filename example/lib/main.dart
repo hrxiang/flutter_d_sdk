@@ -56,14 +56,14 @@ class _MyAppState extends State<MyApp> {
                 }
 
                 FlutterDSdk(action: action).call(
-                  uriString: 'dplatform://dplatform.org',
+                  //uriString: 'dplatform://dplatform.org',
+                  uriString: 'org.dplatform.lite://dplatform.org',
                   params: params,
                 ).then((val) {
                   setState(() {
                     token = val;
                   });
                 });
-                //
               },
             ),
 
@@ -95,14 +95,14 @@ class _MyAppState extends State<MyApp> {
                 }
 
                 FlutterDSdk(action: 'pay').call(
-                  uriString: 'dplatform://dplatform.org',
+                  //uriString: 'dplatform://dplatform.org',
+                  uriString: 'org.dplatform.lite://dplatform.org',
                   params: params,
                 ).then((val) {
                   setState(() {
                     pay = val;
                   });
                 });
-                //
               },
             ),
           ],

@@ -34,6 +34,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>dplatform</string>
+		<string>dplatform.lite</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
