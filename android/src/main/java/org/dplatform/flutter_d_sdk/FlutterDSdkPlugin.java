@@ -69,6 +69,7 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
 //                    for (String key : map.keySet()) {
 //                        api.appendParameter(key, map.get(key));
 //                    }
+                    api.appendParameter("params", new JSONObject(map).toString());
                     api.appendParameter("param", new JSONObject(map).toString());
                     //注册回调
                     api.registerRespCallback(new DSdkApiCallback() {
