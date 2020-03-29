@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
 
                 FlutterDSdk(action: action).call(
                   //uriString: 'dplatform://dplatform.org',
-                  uriString: 'org.dplatform.lite.resp://dplatform.org',
+                  uriString: 'org.dplatform.lite://dplatform.org',
                   params: params,
                 ).then((val) {
                   setState(() {
@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
 
                 FlutterDSdk(action: 'pay').call(
                   //uriString: 'dplatform://dplatform.org',
-                  uriString: 'org.dplatform.lite.req://dplatform.org',
+                  uriString: 'org.dplatform.lite://dplatform.org',
                   params: params,
                 ).then((val) {
                   setState(() {
