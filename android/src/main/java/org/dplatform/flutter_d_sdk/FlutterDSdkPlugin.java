@@ -2,6 +2,8 @@ package org.dplatform.flutter_d_sdk;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import org.dplatform.DSdkAPI;
@@ -36,6 +38,21 @@ public class FlutterDSdkPlugin implements MethodChannel.MethodCallHandler {
     public static void registerWith(PluginRegistry.Registrar registrar) {
         MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_d_sdk");
         channel.setMethodCallHandler(new FlutterDSdkPlugin(registrar.activity()));
+
+        //收到scheme请求
+        Uri uri = Utils.getUri(registrar.activity());
+        if (null != uri) {
+            String channelName = "flutter_d_sdk";
+            ActivityInfo info = null;
+            try {
+                info = registrar.activity().getPackageManager().getActivityInfo(registrar.activity().getComponentName(), PackageManager.GET_META_DATA);
+                channelName = info.metaData.getString("flutter_channel");
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            MethodChannel callChannel = new MethodChannel(registrar.messenger(), channelName);
+            callChannel.invokeMethod("call", uri.toString());
+        }
     }
 
     @Override
