@@ -30,11 +30,14 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>1</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>dplatform</string>
-		<string>dplatform.lite</string>
+		<string>org.dplatform.lite.resp</string>
+		<string>org.dplatform.lite.req</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

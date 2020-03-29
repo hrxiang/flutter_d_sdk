@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
 
                 FlutterDSdk(action: action).call(
                   //uriString: 'dplatform://dplatform.org',
-                  uriString: 'org.dplatform.lite://dplatform.org',
+                  uriString: 'org.dplatform.lite.resp://dplatform.org',
                   params: params,
                 ).then((val) {
                   setState(() {
@@ -87,6 +87,7 @@ class _MyAppState extends State<MyApp> {
 
                 var params = {
                   'orderSn': _controllerOrder.text,
+                  'scheme': 'xyttylusdt',
                 };
 
                 if (!(_controllerToken.text?.isEmpty ?? true)) {
@@ -96,7 +97,7 @@ class _MyAppState extends State<MyApp> {
 
                 FlutterDSdk(action: 'pay').call(
                   //uriString: 'dplatform://dplatform.org',
-                  uriString: 'org.dplatform.lite://dplatform.org',
+                  uriString: 'org.dplatform.lite.req://dplatform.org',
                   params: params,
                 ).then((val) {
                   setState(() {
