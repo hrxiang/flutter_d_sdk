@@ -87,7 +87,6 @@ class _MyAppState extends State<MyApp> {
 
                 var params = {
                   'orderSn': _controllerOrder.text,
-                  'scheme': 'xyttylusdt',
                 };
 
                 if (!(_controllerToken.text?.isEmpty ?? true)) {
